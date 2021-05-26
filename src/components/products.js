@@ -12,7 +12,6 @@ import {
 	CardActions,
 	Button,
 	CardActionArea,
-	CardMedia,
 } from '@material-ui/core';
 
 const useStyles = makeStyles({
