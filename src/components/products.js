@@ -6,7 +6,6 @@ import SimpleCart from './simpleCart';
 
 
 import {
-	Typography,
 	Grid,
 	Card,
 	CardContent,
@@ -37,7 +36,7 @@ const useStyles = makeStyles({
 
 const Products = () => {
 	const classes = useStyles();
-	const { typography, h2 } = useStyles();
+	const { h2 } = useStyles();
 	const state = useSelector((state) => {
 		return {
 			TotalInventoryCount: state.products.TotalInventoryCount,
