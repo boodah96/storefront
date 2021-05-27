@@ -1,7 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { increment } from '../store/products';
+import { useSelector, useDispatch  } from 'react-redux';
+import { increment,getCartProducts  } from '../store/products';
 import { makeStyles } from '@material-ui/styles';
+import { If, Else, Then } from 'react-if';
+import SimpleCart from './simpleCart';
 
 
 import {
@@ -16,38 +17,57 @@ import {
 
 const useStyles = makeStyles({
 	root: {
-		maxWidth: 345,
+		maxWidth: 250,
 		flexGrow: 1,
+		margin: '1rem',
+
 	},
 
 	typography: {
-		height: 140,
-		width: 100,
+		textAlign: 'center',
+		fontSize: '2rem',
 	},
 
 	h2: {
 		extAlign: 'center',
 		fontSize: '3rem',
+		marginBottom: '7rem',
 	},
 });
 
-const Products = ({ products, active, increment }) => {
+const Products = () => {
 	const classes = useStyles();
 	const { typography, h2 } = useStyles();
+	const state = useSelector((state) => {
+		return {
+			TotalInventoryCount: state.products.TotalInventoryCount,
+			products: state.products.products,
+			cartProducts: state.products.cartProducts,
+			show: state.products.show,
+			active: state.categories.active,
+		};
+	});
 
-	let activeProducts = products.filter(
-		(product) => product.categoryAssociation === active,
+	let activeProducts = state.products.filter(
+		(product) => product.categoryAssociation === state.active,
 	);
+	const dispatch = useDispatch(getCartProducts);
+
+	const handleClick = (id) => {
+		dispatch(increment(id));
+		dispatch(getCartProducts(id));
+	};
+
 
 	return (
 		<>
-			<Typography variant="h5" component="h5" className={typography}>
-				Browse our Categories
-			</Typography>
-			<h2 className={h2}>{active}</h2>
-			<Grid container justify="center" spacing={4}>
-				<Grid item xs={12}>
-					<Grid container justify="center">
+		<If condition={!state.show}>
+		<Then>
+			
+			<h2 className={h2}>{state.active}</h2>
+			<Grid container justify="center" wrap="wrap" spacing={0} style={{ marginBottom: '10rem' }}>
+				<Grid container  item wrap="wrap" xs={10}  spacing={0}>
+					<Grid container justify="space-evenly" wrap="wrap" spacing={8}>
 						{activeProducts.map((product, i) => (
 							<Card key={i} className={classes.root}>
 								<CardActionArea>
@@ -79,7 +99,7 @@ const Products = ({ products, active, increment }) => {
 									<Button
 										size="small"
 										color="primary"
-										onClick={() => increment(product.name)}
+										onClick={() =>  handleClick(product.id)}
 									>
 										Add to Cart ({product.inventoryCount})
 									</Button>
@@ -89,18 +109,13 @@ const Products = ({ products, active, increment }) => {
 					</Grid>
 				</Grid>
 			</Grid>
-			;
+			</Then>
+			<Else>
+					<SimpleCart />
+				</Else>
+			</If>
 		</>
 	);
 };
 
-const mapStateToProps = (state) => {
-	return {
-		products: state.products.products,
-		active: state.categories.active,
-	};
-};
-
-const mapDispatchToProps = { increment };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default Products;
