@@ -1,7 +1,6 @@
 import { useSelector, useDispatch  } from 'react-redux';
 import { Container,Toolbar, Typography, makeStyles, AppBar } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 import { handleShow } from './../store/products';
 const useStyles = makeStyles(() => ({

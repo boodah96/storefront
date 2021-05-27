@@ -2,6 +2,8 @@
 import { useDispatch, useSelector  } from 'react-redux';
 import { getCategory } from './../store/categories';
 import { handleShow, deleteCartPeoduct } from './../store/products';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -87,7 +89,7 @@ const Categories = () => {
 			
 			<List className={classes.root} subheader={<li />}>
 			<Typography variant="h6" component="h6" >
-				In Chart
+			<AddShoppingCartIcon/>
 			</Typography>
 					{state.cartProducts.map((product) => (
 						<li key={product.id} className={classes.listSection}>
