@@ -12,7 +12,7 @@ import {
 	CardActions,
 	Button,
 	CardActionArea,
-	CardMedia,
+	
 } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -22,8 +22,7 @@ const useStyles = makeStyles({
 	},
 
 	typography: {
-		height: 140,
-		width: 100,
+	
 	},
 
 	h2: {

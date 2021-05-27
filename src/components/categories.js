@@ -1,6 +1,7 @@
 
 import { connect } from 'react-redux';
 import { getCategory } from './../store/categories';
+import{Button} from '@material-ui/core';
 
 const Categories = ({ categories, getCategory }) => {
 	return (
@@ -16,12 +17,17 @@ const Categories = ({ categories, getCategory }) => {
 				{categories.map((category, i) => (
 					<li
 						key={i}
+						
+
+ 
 						onClick={() => getCategory(category.name)}
 						style={{
 							cursor: 'pointer',
 						}}
 					>
-						{category.displayName}
+						<Button variant="contained" color="primary">{category.displayName}</Button>
+						
+						
 					</li>
 				))}
 			</ul>
