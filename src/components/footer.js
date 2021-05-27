@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     top: 'auto',
     bottom: 0,
     height:'50px',
-    background: "#eeeeee",
+    background: "#aaa",
 
   },
   title: {
@@ -25,7 +25,7 @@ function Footer() {
     <AppBar position="fixed" color="primary" className={classes.appBar}>
       <Toolbar>
       <Typography variant="h6" className={classes.title}>
-      © 2021 React-Reduux 401 <br></br>
+      © 2021 React-Redux 401 <br></br>
     </Typography>
       </Toolbar>
     </AppBar>
