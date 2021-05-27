@@ -6,6 +6,7 @@ import SimpleCart from './simpleCart';
 
 
 import {
+	Typography,
 	Grid,
 	Card,
 	CardContent,
