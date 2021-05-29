@@ -1,42 +1,5 @@
 const intialState = {
-    products: [{
-            id: 1,
-            categoryAssociation: 'ELECTRONICS',
-            name: 'Xiaomi Smart Router',
-            description: 'Xiaomi Mesh 2.4 + 5GHz WiFi Smart Router AC1300 + 1000M LAN + 1300M Power Line Qualcomm DAKOTA 4 Core 4 Signal Amplifie',
-            price: '28JD',
-            inventoryCount: 0,
-        },
-        {
-            id: 2,
-            categoryAssociation: 'FOOD',
-            name: 'Fettuccine Delicato',
-            description: 'Fettuccine pasta, fresh cooking cream, fresh mushroom and marinated chicken.',
-            price: '4JD',
-            inventoryCount: 0,
-
-        },
-        {
-            id: 3,
-            categoryAssociation: 'FOOD',
-            name: 'upreme Pizza',
-            description: 'Pizza sauce, double amount of pepperoni and mozzarella cheese.',
-            price: '28JD',
-            inventoryCount: 0,
-
-        },
-        {
-            id: 4,
-            categoryAssociation: 'ELECTRONICS',
-            name: 'IPX7 waterproof level',
-            description: 'IPX7 waterproof level Multi-functional and powerful sitting straight electric cleaning',
-            price: '25JD',
-            inventoryCount: 0,
-
-        },
-
-
-    ],
+    products: [],
     TotalInventoryCount: 0,
     cartProducts: [],
     show: false,
@@ -87,35 +50,12 @@ const products = (state = intialState, action) => {
             };
         case 'DELETE':
             const productsDelete = state.cartProducts.filter(
-                (product) => product.id !== payload,
+                (product) => product._id !== payload,
             );
 
-            const sum = productsDelete.reduce((acc, product) => {
-                acc += product.inventoryCount;
-                return acc;
-            }, 0);
-
-            const InventoryCount = sum;
-
-            const newProducts = state.products.map((product) => {
-                if (payload === product.id) {
-                    return {
-                        id: payload,
-                        categoryAssociation: product.categoryAssociation,
-                        name: product.name,
-                        description: product.description,
-                        price: product.price,
-                        inventoryCount: 0,
-                        img: product.img,
-                    };
-                } else {
-                    return product;
-                }
-            });
-
             return {
-                products: newProducts,
-                TotalInventoryCount: InventoryCount,
+                products: state.products,
+                TotalInventoryCount: state.TotalInventoryCount && state.TotalInventoryCount - 1,
                 cartProducts: productsDelete,
                 show: state.show,
             };
